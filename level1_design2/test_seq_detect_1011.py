@@ -53,7 +53,7 @@ async def test_seq_bug2(dut):
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
     #now input sequence is given as: 101011
-    #bug in line 49 of seq_detect_1011.v file
+    #bug in line 65 of seq_detect_1011.v file
     #for correction of this bug: put "next_state=SEQ_10;" in line 65
     dut.inp_bit.value=1
     await FallingEdge(dut.clk)
@@ -84,7 +84,7 @@ async def test_seq_bug3(dut):
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
     #now input sequence is given as: 1011011
-    #bug in line 49 of seq_detect_1011.v file
+    #bug in line 69 of seq_detect_1011.v file
     #for correction of this bug: put "next_state=SEQ_1;" in line 69
     dut.inp_bit.value=1
     await FallingEdge(dut.clk)
