@@ -6,7 +6,9 @@ from cocotb.triggers import Timer
 @cocotb.test()
 async def test_mux(dut):
     """Test for mux2"""
-
+    #case condition  "5'b11110: out = inp30;" is missing after line 57
+    #so when select line is 5'b11110 then it will take default case output rather than giving inp30 at output
+    #so to remove this bug then insert line "5'b11110: out = inp30;" is after line 57
     s=30
     i0=0
     i1=1
