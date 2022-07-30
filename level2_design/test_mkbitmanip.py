@@ -34,8 +34,9 @@ def run_test(dut):
 
     ######### CTB : Modify the test to expose the bug #############
     # input transaction
+    # for all the non zero values of mav_putvalue_src2 and mav_putvalue_src3, the test will fail
     mav_putvalue_src1 = 0x5
-    mav_putvalue_src2 = 0x0
+    mav_putvalue_src2 = 0x1
     mav_putvalue_src3 = 0x0
     mav_putvalue_instr = 0x101010B3
 
