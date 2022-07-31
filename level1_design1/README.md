@@ -15,7 +15,6 @@ dut.inp30.value = i30
 
 The assert statement is used for comparing the mux's outut to the expected value.
 
-The following error is seen:
 ```
 assert dut.out.value==inp30, f"mux result is incorrect:(dut.out.value)!=inp30"
 ```
