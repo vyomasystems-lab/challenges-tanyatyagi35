@@ -1,13 +1,8 @@
-# Adder Design Verification
-
+# sequence detector Design Verification
 The verification environment is setup using [Vyoma's UpTickPro](https://vyomasystems.com) provided for the hackathon.
-
-*Make sure to include the Gitpod id in the screenshot*
-
-![](https://i.imgur.com/miWGA1o.png)
+![image](https://user-images.githubusercontent.com/30209235/182022570-64dd2114-e07a-482c-81a4-d44f27ef530d.png)
 
 ## Verification Environment
-
 The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (adder module here) which takes in 4-bit inputs *a* and *b* and gives 5-bit output *sum*
 
 The values are assigned to the input port using 
