@@ -95,7 +95,6 @@ async def test_seq_bug3(dut):
     dut.inp_bit.value=1
     await FallingEdge(dut.clk)
     assert dut.seq_seen.value==1,f"sequencer result is incorrect:(dut.seq_seen)!=1"
-    dut.seq_seen.value=0
     dut.inp_bit.value=0
     await FallingEdge(dut.clk)
     dut.inp_bit.value=1
