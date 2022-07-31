@@ -7,6 +7,7 @@ The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explaine
 
 FOR BUG1:
 The values are assigned to the input port using 
+```
     dut.reset.value = 1
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
@@ -21,9 +22,11 @@ The values are assigned to the input port using
     await FallingEdge(dut.clk)
     dut.inp_bit.value=1
     await FallingEdge(dut.clk)
+```
 
 FOR BUG2:
 The values are assigned to the input port using 
+```
     dut.reset.value = 1
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
@@ -40,8 +43,11 @@ The values are assigned to the input port using
     await FallingEdge(dut.clk)
     dut.inp_bit.value=1
     await FallingEdge(dut.clk)
+```
 
 FOR BUG3:
+The values are assigned to the input port using 
+```
     dut.reset.value = 1
     await FallingEdge(dut.clk)  
     dut.reset.value = 0
@@ -60,7 +66,8 @@ FOR BUG3:
     await FallingEdge(dut.clk)
     dut.inp_bit.value=1
     await FallingEdge(dut.clk)
-    
+```
+
 The assert statement is used for comparing the sequence detector's outut to the expected value:
 assert dut.seq_seen.value==1,f"sequencer result is incorrect:(dut.seq_seen)!=1"
 
