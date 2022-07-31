@@ -104,7 +104,7 @@ Based on the above test input and analysing the design, we see the following
 
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
-
+![image](https://user-images.githubusercontent.com/30209235/182044562-2af47f50-76c7-4951-9623-0880d107c4f0.png)
 The updated design is checked in as seq_detect_1011_fix.v
 
 ## Verification Strategy
