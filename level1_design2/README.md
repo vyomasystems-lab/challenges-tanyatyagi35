@@ -29,6 +29,8 @@ assert dut.sum.value == A+B, "Adder result is incorrect: {A} + {B} != {SUM}, exp
 - Observed Output in the DUT dut.sum=2
 
 Output mismatches for the above inputs proving that there is a design bug
+![image](https://user-images.githubusercontent.com/30209235/182034116-37a046e3-9398-4ed3-b3ec-0a686e13df37.png)
+
 
 ## Design Bug
 Based on the above test input and analysing the design, we see the following
