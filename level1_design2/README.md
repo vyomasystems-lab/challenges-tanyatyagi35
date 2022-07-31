@@ -73,20 +73,25 @@ assert dut.seq_seen.value==1,f"sequencer result is incorrect:(dut.seq_seen)!=1"
 
 ## Test Scenario **(Important)**
 - Test Inputs for detecting bug1:
+```
   input sequence is given as: 11011 to the inp_bit (1 bit) one by one
   Expected Output: seq_seen=1
   Observed Output in the DUT dut.seq_seen=0
+```
   
 - Test Inputs for detecting bug2:
+```
   input sequence is given as: 101011 to the inp_bit (1 bit) one by one
   Expected Output: seq_seen=1
   Observed Output in the DUT dut.seq_seen=0
-  
+```  
 - Test Inputs for detecting bug3:
+```
   input sequence is given as:1011011 to the inp_bit (1 bit) one by one
   Expected Output: seq_seen=1
   Observed Output in the DUT dut.seq_seen=0
-  
+```
+
 Output mismatches for the above inputs proving that there is a design bug
 ![image](https://user-images.githubusercontent.com/30209235/182042000-f860d193-4090-4385-af80-1eeb6a75d8cf.png)
 
