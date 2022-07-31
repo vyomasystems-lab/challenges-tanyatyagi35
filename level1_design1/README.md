@@ -1,9 +1,7 @@
-# Adder Design Verification
+# multiplexer Design Verification
 
 The verification environment is setup using [Vyoma's UpTickPro](https://vyomasystems.com) provided for the hackathon.
-
-*Make sure to include the Gitpod id in the screenshot*
-
+![image](https://user-images.githubusercontent.com/30209235/182022570-64dd2114-e07a-482c-81a4-d44f27ef530d.png)
 
 
 ## Verification Environment
@@ -49,5 +47,7 @@ Updating the design and re-running the test makes the test pass.
 The updated design is checked in as adder_fix.v
 
 ## Verification Strategy
+in case of multiplexer, we will try to figure out how many inputs (that are going to be multiplexed to the output) are available in the code and check whether all those inputs are being transmitted to the output line in any of the possible cases formed by select line inputs.if there is any possibility that a paricular case is not written in the code for which the particular input will go to the output line then there is a bug in creating possible cases in the code.
 
 ## Is the verification complete ?
+yes, the entire verification is completed.
