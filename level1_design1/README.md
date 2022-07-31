@@ -23,7 +23,7 @@ assert dut.out.value==i30, f"mux result is incorrect:(dut.out.value)!=inp30"
 ## Test Scenario **(Important)**
 - Test Inputs: sel=30, inp30=2
 - Expected Output: out=inp30 i.e., out=2
-- Observed Output in the DUT dut.sum=0 
+- Observed Output in the DUT dut.out=0 
 
 Output mismatches for the above inputs proving that there is a design bug
 ![image](https://user-images.githubusercontent.com/30209235/182032923-9d2895fa-4ca6-426d-b1a6-7d1aceb96c0e.png)
