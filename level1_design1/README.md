@@ -17,7 +17,7 @@ The assert statement is used for comparing the mux's outut to the expected value
 
 The following error is seen:
 ```
-assert dut.out.value==i30, f"mux result is incorrect:(dut.out.value)!=inp30"
+assert dut.out.value==inp30, f"mux result is incorrect:(dut.out.value)!=inp30"
 ```
 
 ## Test Scenario **(Important)**
@@ -26,7 +26,7 @@ assert dut.out.value==i30, f"mux result is incorrect:(dut.out.value)!=inp30"
 - Observed Output in the DUT dut.out=0 
 
 Output mismatches for the above inputs proving that there is a design bug
-![image](https://user-images.githubusercontent.com/30209235/182032923-9d2895fa-4ca6-426d-b1a6-7d1aceb96c0e.png)
+![image](https://user-images.githubusercontent.com/30209235/182034354-a8d147a9-0d1a-428d-920c-24cce5cc7387.png)
 
 ## Design Bug
 Based on the above test input and analysing the design, we see the following
