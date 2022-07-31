@@ -1,5 +1,4 @@
-# Adder Design Verification
-
+# bitmanipulation Design Verification
 The verification environment is setup using [Vyoma's UpTickPro](https://vyomasystems.com) provided for the hackathon.
 
 *Make sure to include the Gitpod id in the screenshot*
