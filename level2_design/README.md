@@ -48,7 +48,15 @@ The values are assigned to the input port using
     mav_putvalue_src3 = 0xFFFF1111
     mav_putvalue_instr = 0x11100B20
 ```
-
+    # driving the input transaction
+    ```
+    dut.mav_putvalue_src1.value = mav_putvalue_src1
+    dut.mav_putvalue_src2.value = mav_putvalue_src2
+    dut.mav_putvalue_src3.value = mav_putvalue_src3
+    dut.EN_mav_putvalue.value = 1
+    dut.mav_putvalue_instr.value = mav_putvalue_instr
+    ```
+    
 The assert statement is used for comparing the bitmanip's outut to the expected value.
 ```
     error_message = f'Value mismatch DUT = {hex(dut_output)} does not match MODEL = {hex(expected_mav_putvalue)}'
