@@ -35,6 +35,7 @@ i_SPI_MISO= 1
 - Observed Output in the DUT dut.o_SPI_MOSI= i_TX_Byte[5] i.e., '0' in above given input.
 
 Output mismatches for the above inputs proving that there is a design bug in the the design code.
+![image](https://user-images.githubusercontent.com/30209235/182213539-61adb618-74a0-4656-8a73-d5b46f4c58ae.png)
 
 
 ## Design Bug
