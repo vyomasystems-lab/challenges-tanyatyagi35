@@ -120,6 +120,56 @@ Output mismatches for the above inputs proving that there is a design bug
 ![image](https://user-images.githubusercontent.com/30209235/182044081-968e135e-c5b5-4733-b181-41d646c5887a.png)
 
 ## Verification Strategy
+in order to find the bug, we have used possible cases for the input then we will check the whether expected output is equal to dut output or not:
+```
+case1:
+mav_putvalue_src1: zero
+mav_putvalue_src2: zero
+mav_putvalue_src3: zero
+here the expected output is equal to dut output. Therefore, the test will have status:pass
+
+case2:
+mav_putvalue_src1: zero
+mav_putvalue_src2: zero
+mav_putvalue_src3: non-zero
+here the expected output is not equal to dut output. Therefore, the test will have status:fail
+
+case3:
+mav_putvalue_src1: zero
+mav_putvalue_src2: non-zero
+mav_putvalue_src3: zero
+here the expected output is equal to dut output. Therefore, the test will have status:pass
+
+case4:
+mav_putvalue_src1: zero
+mav_putvalue_src2: non-zero
+mav_putvalue_src3: non-zero
+here the expected output is equal to dut output. Therefore, the test will have status:pass
+
+case5:
+mav_putvalue_src1: non-zero
+mav_putvalue_src2: zero
+mav_putvalue_src3: zero
+here the expected output is equal to dut output. Therefore, the test will have status:pass
+
+case6:
+mav_putvalue_src1: non-zero
+mav_putvalue_src2: zero
+mav_putvalue_src3: non-zero
+here the expected output is not equal to dut output. Therefore, the test will have status:fail
+
+case7:
+mav_putvalue_src1: non-zero
+mav_putvalue_src2: non-zero
+mav_putvalue_src3: zero
+here the expected output is not equal to dut output. Therefore, the test will have status:fail
+
+case8:
+mav_putvalue_src1: non-zero
+mav_putvalue_src2: non-zero
+mav_putvalue_src3: non-zero
+here the expected output is not equal to dut output. Therefore, the test will have status:fail
+```
 
 ## Is the verification complete ?
 yes, every possible test cases are taken for which test will fail.
