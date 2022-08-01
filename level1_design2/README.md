@@ -3,7 +3,7 @@ The verification environment is setup using [Vyoma's UpTickPro](https://vyomasys
 ![image](https://user-images.githubusercontent.com/30209235/182022570-64dd2114-e07a-482c-81a4-d44f27ef530d.png)
 
 ## Verification Environment
-The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (adder module here) which takes in the sequence of input bits into inp_bit input signal one by one as inp_bit is 1 bit signal.
+The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test which takes in the sequence of input bits into inp_bit input signal one by one as inp_bit is 1 bit signal.
 
 FOR BUG1:
 The values are assigned to the input port using 
