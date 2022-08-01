@@ -108,6 +108,13 @@ Updating the design and re-running the test makes the test pass.
 The updated design is checked in as seq_detect_1011_fix.v
 
 ## Verification Strategy
+In order to create overlapping sequence detector, following cases should be considered (explained using examples):
+1. for sequence 11011:
+when first bit comes (which is '1') then the sequence detector moves from IDLE state to SEQ_1 state. Now when second bit comes (which is again '1') then detector should remain at achieved SEQ_1 state so that this '1' can be used for creating further sequence(1011) rather than going to IDLE state and then again waiting for new '1' to start the required sequence detection.
+2. for sequence 101011:
+when first bit comes (which is '1') then the sequence detector moves from IDLE state to SEQ_1 state. Now when second bit comes (which is '0') then the sequence detector moves from the SEQ_1 state to SEQ_10 state. Now when third bit I.e., '1' comes now it will go to SEQ_101 state. Now when '0' comes then the desired sequence is broken but we can use previous two bits i.e., '10' for starting point of creation of our desired sequence.
+3. for sequence 1011011:
+when first 4 bits comes i.e., '1011' then we are able to detect our desired sequence and seq_seen becomes '1' and the further coming new input bits in order to make the entire '1011' sequence again, we can use previous one bit i.e., '1'. so when '011' comes in next incoming bits then we can detect '1011' again using '1' from previous detected sequence and again seq_seen will become '1'.
 
 
 ## Is the verification complete ?
