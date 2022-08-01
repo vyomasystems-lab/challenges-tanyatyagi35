@@ -3,42 +3,76 @@ The verification environment is setup using [Vyoma's UpTickPro](https://vyomasys
 ![image](https://user-images.githubusercontent.com/30209235/182022570-64dd2114-e07a-482c-81a4-d44f27ef530d.png)
 
 ## Verification Environment
-The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (SPI_Master module here) which includes inputs like.
+The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (SPI_Master module here) which includes inputs like i_TX_Byte (8 bit input), i_TX_DV (1 bit input), i_SPI_MISO (1 bit input).
+```
+i_TX_Byte= 209
+i_TX_DV= 0
+i_SPI_MISO= 1
+```
 
-The values are assigned to the input port using 
+The values are assigned to the input port using
 ```
-dut.sel.value = s
-dut.inp30.value = i30
+dut.i_TX_Byte.value = i_TX_Byte
+dut.i_TX_DV.value = i_TX_DV
+dut.i_SPI_MISO.value = i_SPI_MISO
+```
+The assert statement is used for comparing the SPI_Master's output to the expected value.
+```
+error_message = f'Value mismatch DUT = {hex(dut_output)} does not match MODEL =
+{hex(expected_output)}'
+assert dut_output == expected_output, error_message
 ```
 
-The assert statement is used for comparing the SPI_Master's outut to the expected value.
-
-```
-assert dut.out.value==inp30, f"mux result is incorrect:(dut.out.value)!=inp30"
-```
 
 ## Test Scenario **(Important)**
-- Test Inputs: sel=30, inp30=2
-- Expected Output: out=inp30 i.e., out=2
-- Observed Output in the DUT dut.out=0 
+- Test Inputs:
+```
+#for 6th bit transmission
+i_TX_Byte= 209   i.e., 11010001 in binary and this will be transmitted through MOSI line bit by bit.
+i_TX_DV= 1
+i_SPI_MISO= 1
+```
+- Expected Output: i_TX_Byte[6] i.e., '1' in above given input
+- Observed Output in the DUT dut.o_SPI_MOSI= i_TX_Byte[5] i.e., '0' in above given input.
 
-Output mismatches for the above inputs proving that there is a design bug
-![image](https://user-images.githubusercontent.com/30209235/182034354-a8d147a9-0d1a-428d-920c-24cce5cc7387.png)
+Output mismatches for the above inputs proving that there is a design bug in the the design code.
+
 
 ## Design Bug
 Based on the above test input and analysing the design, we see the following
+Based on the above test input and analysing the design, we see the following:
+```
+ else
+    begin
+      // If ready is high, reset bit counts to default
+      if (o_TX_Ready)
+      begin
+        r_TX_Bit_Count <= 3'b111;
+      end
+      // Catch the case where we start transaction and CPHA = 0
+      else if (r_TX_DV & ~w_CPHA)
+      begin
+        o_SPI_MOSI <= r_TX_Byte[3'b111];
+        r_TX_Bit_Count <= 3'b110;
+      end
+      else if ((r_Leading_Edge & w_CPHA) | (r_Trailing_Edge & ~w_CPHA))
+      begin
+        r_TX_Bit_Count <= r_TX_Bit_Count - 1'b1;
+        o_SPI_MOSI <= r_TX_Byte[r_TX_Bit_Count];      //--->bug in this line
+      end
+    end
+```
+for initial count 7, we will transmit bit 7 i.e., r_TX_Byte[7] then count is made 6  
+but when last “else if” block is executed then it again decremented the count to 5 and now the transmitted bit on MOSI line will be r_TX_Byte[5] rather than r_TX_Byte[6].  
 
-case condition  "5'b11110: out = inp30;" is missing after line 57 in mux.v file
-so when select line is 5'b11110 then it will take default case output (which is zero) rather than giving inp30 at output so to remove this bug then insert line "5'b11110: out = inp30;" after line 57
 
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
-The updated design is checked in as mux_fix.v
-![image](https://user-images.githubusercontent.com/30209235/182033461-8fca941b-c9e8-4d9b-ab21-1635c4462769.png)
-![image](https://user-images.githubusercontent.com/30209235/182033446-41b5f67b-9fa3-48b6-9d15-8305a1cb9447.png)
+We need to replace “o_SPI_MOSI <= r_TX_Byte[r_TX_Bit_Count];” line by “o_SPI_MOSI <= r_TX_Byte[r_TX_Bit_Count+1];”.
+The updated design is checked in as SPI_Master_fix.v
 
 ## Verification Strategy
-in case of multiplexer, we will try to figure out how many inputs (that are going to be multiplexed to the output) are available in the code and check whether all those inputs are being transmitted to the output line in any of the possible cases formed by select line inputs.if there is any possibility that a paricular case is not written in the code for which the particular input will go to the output line then there is a bug in creating possible cases in the code.
+Here for verification we will check whether all the bits of i_TX_Byte are transmitted onto the MOSI line or not. There should not be any case in which any of the bit transmission is missed. If any other bit is transmitted in place of the desired bit then we can judge that there is a bug in the code.
 
 ## Is the verification complete ?
 yes, the entire verification is completed.
